@@ -10,7 +10,7 @@ router.use(express.json());
 router.get('/hello', helloController.get);
 router.get('/getTasks', taskController.get);
 router.post('/addTask', taskController.post);
-// router.get('/deleteTask', taskController.delete);
-// router.get('/addTask', taskController.put);
+router.delete('/deleteTask', taskController.delete);
+router.put('/changeStatus', taskController.put);
 
 export default router;
