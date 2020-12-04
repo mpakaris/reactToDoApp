@@ -19,8 +19,7 @@ export const taskService = {
   async deleteTasks(taskName) {
     let response = JSON.parse(fs.readFileSync("output.json", 'utf8'))
     let returnArray = response.filter(task => {
-      if (task.name !== taskName.name) {
-        console.log(task)
+      if (task.name !== taskName.name) {       
         return task;
       }
     })
@@ -29,8 +28,7 @@ export const taskService = {
   },
   
   async updateStatus(taskName) {
-    let response = JSON.parse(fs.readFileSync("output.json", 'utf8'))
-    console.log("TaskNAME:", taskName)
+    let response = JSON.parse(fs.readFileSync("output.json", 'utf8'))    
     let returnArray = response.map(task => {
       if (task.name === taskName.name) {
         task.status = !task.status
@@ -43,8 +41,7 @@ export const taskService = {
   },
 
   async saveTasks(jsonData) {
-    let jsonContent = JSON.stringify(jsonData);
-    console.log(jsonContent);
+    let jsonContent = JSON.stringify(jsonData);    
     fs.writeFile("output.json", jsonContent, 'utf8', function (err) {
       if (err) {
         console.log("An error occured while writing JSON Object to File.");
