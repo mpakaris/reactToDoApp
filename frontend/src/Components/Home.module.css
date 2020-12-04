@@ -1,5 +1,5 @@
 .home {
-  max-width: 90%;
+  width: 100%;
   margin: 0 auto;
   position: relative;
 }
@@ -7,28 +7,34 @@
 img {
   width: 100%;
   height: auto;
-  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-h1 {
-  font-size: 4em;
-  font-weight: 800;
-  color: whitesmoke;
-  text-align: center;
-  position: absolute;
-  top: 50px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.task {
-  width: 100%;
-  border: 1px solid red;
-  margin-bottom: 20px;
-}
-
-.delete {
-  text-decoration: underline;
+.cursor {
+  cursor: 'pointer';
   margin-bottom: 0px;
-  margin-right: 10px;
+}
+
+.tasks {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .home {
+    width: 60%;
+    height: 98vh;
+    margin: 0 auto;
+    position: relative;
+    border: 2px solid darkgray;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .formInput {
+    width: 60%;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }

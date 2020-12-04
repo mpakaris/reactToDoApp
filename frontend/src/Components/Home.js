@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { Col, Container, Form, Row } from 'react-bootstrap'
+import { Button, Col, Container, Form, Row } from 'react-bootstrap'
+import Header from '../../src/assets/header.PNG'
 import styles from './Home.module.css'
-
-
 
 const Home = () => {
 
@@ -22,49 +21,80 @@ const Home = () => {
   ]
 
   const [tasks, setTasks] = useState(toDos)
+  const [newTask, setNewTask] = useState('')
 
-  const changeStatus = (name) => {
-
+  const changeStatus = (taskName) => {
     let tasksChange = [...tasks];
     tasksChange.map(task => {
-      if (task.name === name) {
+      if (task.name === taskName) {
         task.status = !task.status
       }
     })
-    console.log(tasksChange)
     setTasks(tasksChange)
-
-
-
   }
 
-  const deleteTask = () => {
-    console.log("Delete Function")
+  const deleteTask = (taskName) => {
+    let newTaskArray = tasks.filter(task => {
+      if (task.name !== taskName) {
+        return task
+      }
+    })
+    setTasks(newTaskArray)
+  }
+
+  const handleChange = (e) => {
+    setNewTask(e.target.value)
+    console.log(newTask)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("submit works", newTask)
+    let taskList = [...tasks]
+    taskList.push({
+      name: newTask,
+      status: false
+    })
+    setTasks(taskList)
+    setNewTask('')
   }
 
   return (
     <div className={styles.home}>
-      { tasks && tasks.map(task => {
+      <img src={Header} alt="header" />
+      <p className='h3 text-center my-3'>TASK MASTER</p>
+      {tasks && tasks.map(task => {
         return (
-          <div key={tasks.indexOf(task)}>
-            <div className={styles.task}>
-              <Container>
-                <Row>
-                  <Col xs={2}>
-                    <Form.Check checked={task.status} aria-label="option" onChange={() => changeStatus(task.name)} />
-                  </Col>
-                  <Col xs={7}>
-                    {task.name}
-                  </Col>
-                  <Col xs={3} onClick={deleteTask}>
-                    <p className={styles.delete}>Delete</p>
-                  </Col>
-                </Row>
-              </Container>
-            </div>
-          </div>
+          <Container className={`border py-3 my-3 ${task.status ? "border-success" : "border-warning"}`} key={tasks.indexOf(task)}>
+            <Row>
+              <Col xs={2} md={2} >
+                <Form.Check checked={task.status} aria-label="option" onChange={() => changeStatus(task.name)} />
+              </Col>
+              <Col xs={5} md={7} >
+                {task.name}
+              </Col>
+              <Col xs={5} md={3} >
+                <p className={styles.cursor} onClick={() => deleteTask(task.name)}>Löschen</p>
+              </Col>
+            </Row>
+          </Container>
         )
       })}
+      <div className='formInput d-flex justify-content-center mt-5'>
+        <Form onSubmit={handleSubmit} style={{ width: '80%' }}>
+          <Form.Group controlId="formBasicText px-0">
+            <Form.Label>
+              <p className='h6'>Neue Aufgabe:</p>
+            </Form.Label>
+            <Form.Control type="text" value={newTask} onChange={handleChange} placeholder="z.B. Code Review für Merge Request #34" />
+            <div className="d-flex justify-content-end">
+              <Button variant="dark" type="submit" className='mt-3'>
+                Jetzt Anlegen!
+            </Button>
+            </div>
+          </Form.Group>
+        </Form>
+      </div>
     </div>
   )
 }
