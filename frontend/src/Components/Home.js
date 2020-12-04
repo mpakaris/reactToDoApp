@@ -45,7 +45,6 @@ const Home = () => {
 
   const handleChange = (e) => {
     setNewTask(e.target.value)
-    console.log(newTask)
   }
 
   const handleSubmit = (event) => {
