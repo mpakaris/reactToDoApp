@@ -104,7 +104,7 @@ const Home = () => {
                 {task.name}
               </Col>
               <Col xs={5} md={3} className="d-flex justify-content-center align-items-center">
-                <p style={{ cursor: 'pointer' }} onClick={() => deleteTask(task.name)}>Löschen</p>
+                <p style={{ cursor: 'pointer', marginBottom: '0px' }} onClick={() => deleteTask(task.name)}>Löschen</p>
               </Col>
             </Row>
           </Container>
