@@ -1,7 +1,7 @@
 export const Tasks = [
   {
     name: 'Beispiel Task 1',
-    status: true
+    status: false
   },
   {
     name: 'Beispiel Task 2',
