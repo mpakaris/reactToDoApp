@@ -52,7 +52,5 @@ export const taskService = {
       }
       console.log("JSON file has been saved.");
     });
-  },
-
-  
-};
+  }
+ };
